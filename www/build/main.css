@@ -25677,3 +25677,19 @@ ion-navbar.toolbar {
 page-login .col-logo {
   padding-top: 10%;
 }
+
+page-search .session_text {
+  color: #020202;
+}
+
+page-search .etiqueta_input .text-input {
+  text-align: right !important;
+}
+
+page-search .picker-toolbar-button .picker-toolbar-cancel .button-inner {
+  content: "Cancelar";
+}
+
+page-search .picker-button .disable-hover .button-inner {
+  content: "Listo";
+}

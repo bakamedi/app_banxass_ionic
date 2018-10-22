@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -12,22 +11,25 @@ export class UserProvider {
 
   private userKey: string = 'USER';
   private clientKey: string = 'CLIENT';
+  private userSessionKey: string = 'SESSION_TEMP';
 
-  constructor(
-    public http: HttpClient) {
+  constructor() {
     console.log('Hello UserProvider Provider');
   }
 
   // guarda datos en el dispositovo
   saveDataDevice(data): void {
-    localStorage.setItem(this.userKey, data.user);  
-    localStorage.setItem(this.clientKey, data.client);
+    console.log(data);
+    localStorage.setItem(this.userKey, data.USER);  
+    localStorage.setItem(this.clientKey, data.CLIENT);
+    localStorage.setItem(this.userSessionKey, "Buscar una Sesion");
   }
 
   // cerrar sesion
   removeDataDevice(): void {
     localStorage.removeItem(this.userKey);
     localStorage.removeItem(this.clientKey);
+    localStorage.removeItem(this.userSessionKey);
   }
 
   verifyUser(){
@@ -36,6 +38,22 @@ export class UserProvider {
     }else{
       return false;
     }
+  }
+
+  getClient(): string{
+    return localStorage.getItem(this.clientKey);
+  }
+
+  getUser(){
+    return localStorage.getItem(this.userKey);
+  }
+
+  getSessionUserString(): string{
+    return localStorage.getItem(this.userSessionKey);
+  }
+
+  setSessionUserString(userTempSession: string): void{
+    localStorage.setItem(this.userSessionKey, userTempSession);
   }
 
 }

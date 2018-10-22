@@ -12,13 +12,16 @@ import { AuthProvider } from '../providers/auth/auth';
 import { SearchPage } from '../pages/search/search';
 import { UserProvider } from '../providers/user/user';
 import { GlobalProvider } from '../providers/global/global';
+import { SessionListPage } from '../pages/session-list/session-list';
+import { UserListProvider } from '../providers/user-list/user-list';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
-    SearchPage
+    SearchPage,
+    SessionListPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { GlobalProvider } from '../providers/global/global';
     MyApp,
     HomePage,
     LoginPage,
-    SearchPage
+    SearchPage,
+    SessionListPage
   ],
   providers: [
     StatusBar,
@@ -38,7 +42,8 @@ import { GlobalProvider } from '../providers/global/global';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     UserProvider,
-    GlobalProvider
+    GlobalProvider,
+    UserListProvider
   ]
 })
 export class AppModule {}

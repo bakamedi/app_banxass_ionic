@@ -1,0 +1,36 @@
+<ion-header no-border>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Agrosoft
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button (click)="openModalSearch()" ion-button small full color="light">
+    <ion-icon name="search"></ion-icon>
+    Empezar una Busqueda
+  </button>
+  <ion-list>
+    <ion-item>
+      <h2>Emapacadora: text</h2>
+      <h3>Peso: text</h3>
+      <ion-row>
+        <ion-col>
+          <ion-note>
+            Etiqueta: text
+          </ion-note>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-note>
+            12/12/2018          
+          </ion-note>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

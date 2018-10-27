@@ -19,7 +19,7 @@ export class AuthProvider {
   }
   
 
-  reqOpts;
+  private reqOpts;
   private loggedIn: boolean = false;
   //private options:RequestOptions = new RequestOptions({headers: this.headers });
   
@@ -54,16 +54,13 @@ export class AuthProvider {
     console.log(this.gv.getApiLogin());
     return this.http.post(""+this.gv.getApiLogin()+"", formLogin.value, this.reqOpts)
       .map(data =>{
-        console.log(data);
+        //console.log(data);
         if(data['logIn']){
           this.loggedIn = false;
           return this.loggedIn;
         }
         this.userProvider.saveDataDevice(data);
         this.loggedIn = true;
-        console.log("------------------");
-        console.log(this.loggedIn);
-        console.log("------------------");
         return this.loggedIn;
       },error => {
         console.log(error);
@@ -80,9 +77,9 @@ export class AuthProvider {
       .map( data => {
         this.userProvider.removeDataDevice();
         this.loggedIn = false;
-        console.log("------------------");
-        console.log(this.loggedIn);
-        console.log("------------------");
+        //console.log("------------------");
+        //console.log(this.loggedIn);
+        //console.log("------------------");
         console.log(data);
       }, error => {
         console.log(error);

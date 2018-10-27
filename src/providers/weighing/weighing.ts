@@ -1,24 +1,23 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GlobalProvider } from '../global/global';
-import 'rxjs/add/operator/map';
 
 /*
-  Generated class for the UserListProvider provider.
+  Generated class for the WeighingProvider provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
 @Injectable()
-export class UserListProvider {
+export class WeighingProvider {
 
-  reqOpts;
-  //private options:RequestOptions = new RequestOptions({headers: this.headers });
-  
+  private reqOpts;
+
   constructor(
     private gv: GlobalProvider,
-    private http: HttpClient) {
-    console.log('Hello AuthProvider Provider');
+    private http: HttpClient
+    ) {
+    console.log('Hello WeighingProvider Provider');
     this.reqOpts = this._initializeReqOpts(this.reqOpts);
     this.reqOpts = this. _addStandardHeaders(this.reqOpts.headers);
   }
@@ -41,12 +40,11 @@ export class UserListProvider {
     return reqOpts;
   }
 
-  getUserByType(){
-    return this.http.get(""+this.gv.getApiUserType(), this.reqOpts)
+  public getWeighing(formWeighing){
+    return this.http.post(""+this.gv.getApiWeighingGet()+"", formWeighing.value ,this.reqOpts)
       .map( data => {
-        console.log(data);
         return data;
-      },error => {
+      }, error => {
         console.log(error);
       });
   }

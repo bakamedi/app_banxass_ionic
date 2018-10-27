@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { UserListProvider } from '../../providers/user-list/user-list';
 import { UserProvider } from '../../providers/user/user';
+import { SessionProvider } from '../../providers/session/session';
 
 /**
  * Generated class for the SessionListPage page.
@@ -18,36 +18,44 @@ import { UserProvider } from '../../providers/user/user';
 export class SessionListPage {
 
   loader;
-  usersList;
+  sessionsList = undefined;
+  existResult: boolean = false;
 
   constructor(
     public loadingCtrl: LoadingController,
     private userProvider: UserProvider,
-    private userListProvider: UserListProvider,
+    private sessionProvider: SessionProvider,
     public navCtrl: NavController,
     public navParams: NavParams) {
-      this.loader = this.loadingMensaje("Cargando Usuarios..");
-      this.loader.present();
-      this.getUsers();
-      this.loader.dismiss();
+      
+    this.loader = this.loadingMensaje("Cargando Sesiones..");
+    this.loader.present();
+    this.getSessions();
+    this.loader.dismiss();
   }
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SessionListPage');
   }
 
-  getUsers(){
-    this.userListProvider.getUserByType().subscribe( users => {
-      this.usersList = users;
-      console.log(users);
+  getSessions(){
+    this.sessionProvider.getSessions().subscribe( sessions => {
+      if(sessions != undefined){
+        this.existResult = true;
+        this.sessionsList = sessions;
+      }
+      //console.log("----->"+this.usersResult.length)
+      console.log(sessions);
     }, error => {
       console.log(error);
     });
   }
 
-  selectUser(user){
-    console.log(user.CLIENT);
-    this.userProvider.setSessionUserString(user.CLIENT);
+  selectSession(session){
+    console.log(session.NAME);
+    this.userProvider.setSessionUser(session);
     this.navCtrl.pop();
   }
 
@@ -56,5 +64,10 @@ export class SessionListPage {
       content: message,
     });
   }
+
+  goBack(): void {
+    this.navCtrl.pop();
+  }
+
 
 }

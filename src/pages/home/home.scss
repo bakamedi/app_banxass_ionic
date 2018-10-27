@@ -1,3 +1,51 @@
 page-home {
 
+    #search{
+        text-align: center;
+    }
+
+    .search-result-icon{
+        color: #d4d4d4;
+        font-size: 17rem !important;
+        margin-bottom: 20%;
+        height: 100%;
+    }
+
+    #search .search-text{
+        padding-top: 59%;
+        font-size: 17px !important;
+        color: #b9b9b9 !important;
+    }
+
+    #search button{
+        height: 100%;
+        padding-bottom: 100%;
+    }
+
+
+    .navbar-buttons{
+        background-color: white;
+    }
+
+    #list-header ion-label{
+        font-size: 19px;
+        color: #263f68;
+        letter-spacing: 3px;   
+    }
+
+    #list-header .label .label-md{
+        font-size: 19px;
+        color: #263f68;
+        letter-spacing: 3px;   
+    }
+
+    .center-big-icon{
+        padding-top: 40%;
+    }
+
+    #title-header-list .item-divider-md{
+        font-size: 19px;
+        font-weight: 400;
+    }
+
 }

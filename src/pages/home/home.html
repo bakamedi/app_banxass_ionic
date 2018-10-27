@@ -1,36 +1,156 @@
 <ion-header no-border>
-  <ion-navbar>
+  <ion-navbar color="agrosoft_blue">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      Agrosoft
-    </ion-title>
+    <ion-title center>Agrosoft</ion-title>
+    <ion-buttons end>
+      <button (click)="openModalSearch()" ion-button icon-only>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <button (click)="openModalSearch()" ion-button small full color="light">
-    <ion-icon name="search"></ion-icon>
-    Empezar una Busqueda
-  </button>
-  <ion-list>
-    <ion-item>
-      <h2>Emapacadora: text</h2>
-      <h3>Peso: text</h3>
-      <ion-row>
-        <ion-col>
-          <ion-note>
-            Etiqueta: text
-          </ion-note>
-        </ion-col>
-        <ion-col center text-center>
-          <ion-note>
-            12/12/2018          
-          </ion-note>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-  </ion-list>
+<ion-content padding #content >
+  <div (pan)="closeFab($event, fab)" class="scroll-search-result" *ngIf="isSearch" text-center>
+    <ion-list id="title-header-list" *ngIf="colorBtnKG" no-lines >
+      <ion-item-divider class="header" ion-affix [content]="content">
+        Empacadora 1
+      </ion-item-divider>
+      <ion-item *ngFor="let item of searchResult">
+        <ion-icon ios="ios-pricetag" md="md-pricetag" item-start></ion-icon>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h2>Peso: {{ item.WEIGHT }} [Kg]</h2>
+              <h3>
+                Etiqueta: {{ item.CODE_TAG }}
+              </h3>
+            </ion-col>
+            <ion-col>
+              <ion-note  item-end>
+                {{ item.REGISTER_DATE | amDateFormat: 'YYYY-MM-DD'}}
+              </ion-note>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+    <ion-list id="title-header-list" *ngIf="colorBtnKG" no-lines >
+      <ion-item-divider ion-affix [content]="content">
+        Empacadora 2
+      </ion-item-divider>
+      <ion-item *ngFor="let item of searchResult">
+        <ion-icon ios="ios-pricetag" md="md-pricetag" item-start></ion-icon>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h2>Peso: {{ item.WEIGHT}} [Kg]</h2>
+              <h3>
+                Etiqueta: {{ item.CODE_TAG }}
+              </h3>
+            </ion-col>
+            <ion-col>
+              <ion-note  item-end>
+                {{ item.REGISTER_DATE | amDateFormat: 'YYYY-MM-DD'}}
+              </ion-note>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+    
+    <ion-list id="title-header-list" *ngIf="colorBtnLB" no-lines >
+      <ion-item-divider ion-affix [content]="content">
+        Empacadora 1
+      </ion-item-divider>
+      <ion-item *ngFor="let item of searchResult">
+        <ion-icon ios="ios-pricetag" md="md-pricetag" item-start></ion-icon>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h2>Peso: {{ item.WEIGHT*2.2  | number : '1.2-2'  }} [Lb]</h2>
+              <h3>
+                Etiqueta: {{ item.CODE_TAG }}
+              </h3>
+            </ion-col>
+            <ion-col>
+              <ion-note  item-end>
+                {{ item.REGISTER_DATE | amDateFormat: 'YYYY-MM-DD'}}
+              </ion-note>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+    <ion-list id="title-header-list" *ngIf="colorBtnLB" no-lines >
+      <ion-item-divider ion-affix [content]="content">
+        Empacadora 2
+      </ion-item-divider>
+      <ion-item *ngFor="let item of searchResult">
+        <ion-icon ios="ios-pricetag" md="md-pricetag" item-start></ion-icon>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h2>Peso: {{ item.WEIGHT*2.2  | number : '1.2-2'  }} [Lb]</h2>
+              <h3>
+                Etiqueta: {{ item.CODE_TAG }}
+              </h3>
+            </ion-col>
+            <ion-col>
+              <ion-note  item-end>
+                {{ item.REGISTER_DATE | amDateFormat: 'YYYY-MM-DD'}}
+              </ion-note>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-fab [hideFabOnscroll]='content' *ngIf="isSearch" #fab right bottom>
+    <button ion-fab color="agrosoft_blue">
+      <ion-icon ios="ios-cog" md="md-cog"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button (click)="changeWeight(1,$event, fab)" *ngIf="outBtnKG" ion-fab >Kg</button>
+      <button (click)="changeWeight(1,$event, fab)" *ngIf="colorBtnKG" color="agrosoft_blue" ion-fab>Kg</button>
+      <button (click)="changeWeight(2,$event, fab)" *ngIf="colorBtnLB" color="agrosoft_blue" ion-fab>Lb</button>
+      <button (click)="changeWeight(2,$event, fab)" *ngIf="outBtnLB" ion-fab>Lb</button>
+    </ion-fab-list>
+    <ion-fab-list side="left">
+      <button (click)="downloadPdf(fab)" ion-fab>
+        <ion-icon ios="ios-document" md="md-document"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+  
+  <div *ngIf="!isSearch && !isNotFound" id="search">
+    <button (click)="openModalSearch()" clear scolor="light" ion-button> 
+      <div class="center-big-icon">
+        <ion-icon  class="search-result-icon" ios="ios-search" md="md-search"></ion-icon>
+        <div class="text-icon">
+          <span class="search-text">
+            No hay datos aún<br>
+            ¡Toca para Consultar un Pesaje!
+          </span>
+        </div>
+      </div>
+    </button>
+  </div>
+
+  <div *ngIf="isNotFound" id="search">
+    <button  (click)="openModalSearch()" clear scolor="light" ion-button> 
+      <div class="center-big-icon">
+        <ion-icon class="search-result-icon" ios="ios-close-circle" md="md-close-circle"></ion-icon>
+        <div class="text-icon">
+          <span class="search-text">
+            No se han encontrado datos<br>
+            ¡Vuelva a intentar con otra fecha!
+          </span>
+        </div>
+      </div>      
+    </button>
+  </div>
 
 </ion-content>

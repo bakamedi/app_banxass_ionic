@@ -6,20 +6,30 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="agrosoft_blue">
     <ion-title>Sesiones</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
-  <ion-list >
-    <button (click)="selectUser(user)" ion-item *ngFor="let user of usersList">
-      <h2>Cliente: {{user.CLIENT}}</h2>
-      <div class="item-status" item-end text-center>
-        <p> Usuario : {{ user.USER }}</p>
-      </div>   
+  <ion-list no-lines *ngIf="existResult">
+    <button (click)="selectSession(session)" ion-item *ngFor="let session of sessionsList">
+      <ion-icon ios="ios-cube" md="md-cube" item-start></ion-icon>
+      <h2>Nombre: {{session.NAME}}</h2>
+      <h3>Tipo: {{ session.TYPE }}</h3>
+      <p>Desde : {{ session.START_DATE | amDateFormat: 'YYYY-MM-DD' }}  Hasta : {{ session.END_DATE | amDateFormat: 'YYYY-MM-DD' }}</p>
     </button>
   </ion-list>
+  <div *ngIf="!existResult" class="session-not-found">
+    <button (click)="goBack()" clear scolor="light" ion-button>
+      <ion-icon ios="ios-list-box" md="md-list-box"></ion-icon>
+      <br>
+      <span class="search-text">
+        <br>
+          No hay Sessiones Aún<br>
+          ¡Toca para Volver!
+      </span>
+    </button>
+  </div>
 </ion-content>

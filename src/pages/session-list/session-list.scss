@@ -1,3 +1,25 @@
 page-session-list {
+    .session-not-found{
+        text-align: center;
+    }
+
+    .session-not-found button{
+        height: 100%;
+        --margin-left: -5%;
+    }
+
+    .session-not-found ion-icon{
+        color: #d4d4d4;
+        font-size: 17rem !important;
+        margin-right: -50%;
+        /* margin-bottom: 92%; */
+        padding-top: 47%;
+        padding-bottom: 98%
+    }
+
+    .session-not-found span{
+        font-size: 17px !important;
+        color: #b9b9b9 !important;
+    }
 
 }

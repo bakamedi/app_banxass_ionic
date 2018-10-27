@@ -38,7 +38,7 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  createFormLogin() {
+  createFormLogin(): void {
     this.formLogin = this.loginBuilder.group({
         CLIENT:  ['bakke', Validators.required],
         USER: ['bakamedi', Validators.required],
@@ -46,13 +46,15 @@ export class LoginPage {
     });
   }
 
-  login(){
+  login(): void{
     this.loader = this.loadingMensaje('Iniciando Sesion Espere...');
     this.loader.present();
     this.authProvider.loginUser(this.formLogin).subscribe( logged => {
       if(logged){
-        this.loader.dismiss();
-        this.navCtrl.setRoot(HomePage, {}, { animate: true });  // GO TO HOME PAGE
+        setTimeout(()=>{
+          this.loader.dismiss();
+          this.navCtrl.setRoot(HomePage, {}, { animate: true });  // GO TO HOME PAGE
+        }, 2000);
         //console.log(localStorage.getItem('USER'));
         //console.log(logged);
       }else{
@@ -70,7 +72,7 @@ export class LoginPage {
     this.menu.enable(false);
   }
 
-  alert(message) {
+  alert(message): void {
     let alert = this.alertCtrl.create({
       title: 'Error',
       message: message,
@@ -84,6 +86,5 @@ export class LoginPage {
       content: message,
     });
   }
-
 
 }

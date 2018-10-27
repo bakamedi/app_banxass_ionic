@@ -1,4 +1,11 @@
 page-search {
+
+    ion-list {
+        .item-md{
+            color: #989898;
+        }
+    }
+
     .session_text{
         color: #020202;
     }
@@ -13,6 +20,10 @@ page-search {
 
     .picker-button .disable-hover .button-inner{
         content: "Listo"
+    }
+
+    .separator{
+        margin-top: 10px;
     }
 
 }

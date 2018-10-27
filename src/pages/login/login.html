@@ -1,46 +1,37 @@
 <ion-header>
-	<ion-navbar>
-		<button ion-button menuToggle>
-			<ion-icon text-name="menu"></ion-icon>
-		</button>
-		<ion-title center></ion-title>
-	</ion-navbar>
+	
 </ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-row justify-content-center align-items-center>
       <ion-col class="col-logo" col-10>
-        <h1 text-center>
+        <h1 class="title" text-center>
           AGROSOFT
         </h1>
       </ion-col>
     </ion-row>
-    <ion-row justify-content-center align-items-center>
+    <ion-row  justify-content-center align-items-center>
       <ion-col col-12>
-        <ion-card>
-          <form [formGroup]="formLogin" (ngSubmit)="login()">
-            <ion-list no-line>  
-
+        <form [formGroup]="formLogin" (ngSubmit)="login()">
+          <ion-list no-line>  
+            <ion-card>
               <ion-item>
-                <ion-label>Cliente</ion-label>
-                <ion-input formControlName="CLIENT" type="text"></ion-input>
-              </ion-item>
-          
-              <ion-item>
+                <ion-icon item-start ios="ios-person" md="md-person"></ion-icon>
                 <ion-label>Usuario</ion-label>
                 <ion-input formControlName="USER" type="text"></ion-input>
               </ion-item>
-            
+            </ion-card>
+            <ion-card>
               <ion-item>
-                <ion-label>Contrasena</ion-label>
+                <ion-icon item-start ios="ios-key" md="md-key"></ion-icon>
+                <ion-label>Contraseña</ion-label>
                 <ion-input formControlName="PASSWORD" type="password"></ion-input>
               </ion-item>
-
-              <button [disabled]="!formLogin.valid" type="submit" ion-button full round>Iniciar Sesion</button>
-            </ion-list>
-          </form>
-        </ion-card>
+            </ion-card>
+            <button color="agrosoft_blue" [disabled]="!formLogin.valid" type="submit" ion-button full>Iniciar Sesión</button>
+          </ion-list>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>

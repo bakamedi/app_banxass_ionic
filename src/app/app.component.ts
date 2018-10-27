@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { AuthProvider } from '../providers/auth/auth';
+import { UserProvider } from '../providers/user/user';
 @Component({
   templateUrl: 'app.html'
 })
@@ -14,8 +15,10 @@ export class MyApp {
   //rootPage:any = HomePage;
   rootPage:any = LoginPage;
   public loader;
+  public userName: string;
 
   constructor(
+    private userProvider: UserProvider,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private authProvider: AuthProvider,
@@ -26,6 +29,8 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      this.setProfileName();
+      console.log(this.userName);
       this.checkPreviousAuthorization();
       statusBar.styleDefault();
       splashScreen.hide();
@@ -34,26 +39,36 @@ export class MyApp {
 
   checkPreviousAuthorization(): void {
     //console.log("AAAAAAAAAAAAAAAAAAAAA");
-    console.log(this.authProvider.isLoggedIn());
-    if( localStorage.getItem('USER')) {
-      this.rootPage = HomePage;
-    } else {
-      this.rootPage = LoginPage;
-    }
+    //console.log(this.authProvider.isLoggedIn());
+    this.loader = this.loadingMessage("Espere..");
+    setTimeout(()=>{
+      if( localStorage.getItem('USER')) {
+        this.setProfileName();
+        this.rootPage = HomePage;
+        this.nav.setRoot(HomePage, {}, { animate: true });
+      } else {
+        this.rootPage = LoginPage;
+      }
+      this.loader.dismiss();
+    }, 0);
   }
 
   logOut(): void{
     this.loader = this.loadingMessage('Cerrando Sesión Espere...');
     this.loader.present().then(() => {
       this.authProvider.logOut().subscribe( () => {
-        this.nav.setRoot(LoginPage);
-        this.nav.popToRoot();
+        setTimeout(()=>{
+          this.userName = "";
+          this.nav.setRoot(LoginPage, {}, { animate: true });
+          this.nav.popToRoot();
+          this.loader.dismiss();
+        }, 2000);
         //console.log(response);
       }, error => {
         console.log(error);
+        this.loader.dismiss();
       });
     });
-    this.loader.dismiss();
   }
 
 
@@ -64,10 +79,10 @@ export class MyApp {
     });
   }
 
-  alertMessage() {
+  alertMessage(): void {
     let alert = this.alertCtrl.create({
       title: 'Alerta',
-      message: '¿Está seguro que desea cerrar la sesión',
+      message: '¿Está seguro que desea cerrar la sesión?',
       buttons: [
         {
           text: 'Cancelar',
@@ -84,6 +99,20 @@ export class MyApp {
       ]
     });
     alert.present();
+  }
+
+  private setProfileName(): void{
+    this.userName = this.userProvider.getUser();
+  }
+
+  openMenu(): void{
+    console.log("++++++++++++++++");
+    this.setProfileName();
+  }
+
+  swipeEvent(event){
+    this.setProfileName();
+    console.log('----------------');
   }
 
 }

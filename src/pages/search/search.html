@@ -6,46 +6,52 @@
 -->
 
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="agrosoft_blue">
     <ion-title>
-      Busqueda
+      Búsqueda
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios">Cancelar</span>
+        <span ion-text color="white" showWhen="ios">Cancelar</span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="search_form" padding>
   <form [formGroup]="formSearch">
-    <ion-list no-line>
-
+    <ion-list no-lines>
+      
       <button (click)="selectSession()" ion-item>
-        Sesion
+        <ion-icon item-start ios="ios-search" md="md-search"></ion-icon>
+        Sesión
         <ion-note class="session_text" item-end>
             {{session}}
         </ion-note>
       </button> 
   
       <ion-item>
-          <ion-label>Fecha Desde</ion-label>
-          <ion-datetime formControlName="START_DATE" displayFormat="MM/DD/YYYY"></ion-datetime>
+        <ion-icon item-start ios="ios-calendar" md="md-calendar"></ion-icon>
+        <ion-label>Fecha Desde</ion-label>
+        <ion-datetime formControlName="START_DATE" displayFormat="DD/MM/YYYY"></ion-datetime>
       </ion-item>
   
       <ion-item>
-          <ion-label>Fecha Hasta</ion-label>
-          <ion-datetime formControlName="END_DATE" displayFormat="MM/DD/YYYY"></ion-datetime>
+        <ion-icon item-start ios="ios-calendar" md="md-calendar"></ion-icon>
+        <ion-label>Fecha Hasta</ion-label>
+        <ion-datetime formControlName="END_DATE" displayFormat="DD/MM/YYYY"></ion-datetime>
       </ion-item>
     
       <ion-item>
+        <ion-icon item-start ios="ios-pricetag" md="md-pricetag"></ion-icon>
         <ion-label>Etiqueta</ion-label>
         <ion-input class="etiqueta_input" formControlName="TYPE" type="text"></ion-input>
       </ion-item>
   
-      <button (click)="search()" [disabled]="!formSearch.valid" type="submit" ion-button full round>Buscar</button>
+      <button (click)="search()" [disabled]="!formSearch.valid" type="submit" ion-button full color="agrosoft_blue">Buscar</button>
+      <div class="separator"></div>
     </ion-list>
   </form>
+  <button (click)="goBackPage()" ion-button full color="light">Cancelar</button>
 </ion-content>

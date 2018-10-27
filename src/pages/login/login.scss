@@ -1,6 +1,56 @@
 page-login {
-    .col-logo{
-        padding-top: 10%;
+
+
+    /*
+    .title{
+        color: #fff;
+        font-size: 40px
     }
+    */
+
+
+    .back-logo{
+        width: 100%;
+        height: 88px;
+    }
+
+    .col-logo{
+        padding-top: 40%;
+    }
+
+
+    /*
+
+    ion-card.card {
+		box-shadow: none;
+		background: transparent;
+    }
+    .item.item-input {
+        background-color: transparent;
+    }	
+
+    .item-inner{
+        box-shadow: inset 0 -1px 0 0 #fff!important;
+    }
+    
+
+    .item {
+        box-shadow: none;
+        margin-bottom: 10px;
+        background: transparent;
+
+        .label, .label[floating] {
+            color: #fff;
+        }
+
+        .text-input, {
+            color: #fff;
+        }
+
+    }
+    ion-icon{
+        color: #fff;
+    }
+    */
 
 }

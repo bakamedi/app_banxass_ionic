@@ -27968,6 +27968,23 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+.color-menu {
+  background-color: #263f68;
+}
+
+.alert-head {
+  background-color: #263f68;
+  padding: 20px 23px 10px;
+}
+
+.alert-title {
+  color: white;
+}
+
+.alert-md .alert-message {
+  font-size: 16px;
+}
+
 page-home #search {
   text-align: center;
 }
@@ -27987,7 +28004,7 @@ page-home #search .search-text {
 
 page-home #search button {
   height: 100%;
-  padding-bottom: 100%;
+  padding-bottom: 65%;
 }
 
 page-home .navbar-buttons {
@@ -28015,46 +28032,31 @@ page-home #title-header-list .item-divider-md {
   font-weight: 400;
 }
 
-page-login {
-  /*
-    .title{
-        color: #fff;
-        font-size: 40px
-    }
-    */
-  /*
+page-login .title {
+  color: #fff;
+  font-size: 32px;
+}
 
-    ion-card.card {
-		box-shadow: none;
-		background: transparent;
-    }
-    .item.item-input {
-        background-color: transparent;
-    }	
+page-login .background {
+  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(45%, #263f68), to(white));
+  background-image: linear-gradient(to bottom right, #263f68 45%, white);
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
 
-    .item-inner{
-        box-shadow: inset 0 -1px 0 0 #fff!important;
-    }
-    
-
-    .item {
-        box-shadow: none;
-        margin-bottom: 10px;
-        background: transparent;
-
-        .label, .label[floating] {
-            color: #fff;
-        }
-
-        .text-input, {
-            color: #fff;
-        }
-
-    }
-    ion-icon{
-        color: #fff;
-    }
-    */
+page-login .grid {
+  position: fixed;
+  z-index: 9999;
 }
 
 page-login .back-logo {
@@ -28063,7 +28065,46 @@ page-login .back-logo {
 }
 
 page-login .col-logo {
-  padding-top: 40%;
+  padding-top: 35%;
+}
+
+page-login .button-login {
+  background-image: -webkit-gradient(linear, left top, right top, from(#233b61), color-stop(#2a4570), color-stop(120%, white));
+  background-image: linear-gradient(to right, #233b61, #2a4570, white 120%);
+}
+
+page-login ion-card.card {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+page-login .item.item-input {
+  background-color: transparent;
+}
+
+page-login .item-inner {
+  -webkit-box-shadow: inset 0 -1px 0 0 #fff !important;
+  box-shadow: inset 0 -1px 0 0 #fff !important;
+}
+
+page-login .item {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  margin-bottom: 10px;
+  background: transparent;
+}
+
+page-login .item .label, page-login .item .label[floating] {
+  color: #fff;
+}
+
+page-login .item .text-input {
+  color: #fff;
+}
+
+page-login ion-icon {
+  color: #fff;
 }
 
 page-search ion-list .item-md {

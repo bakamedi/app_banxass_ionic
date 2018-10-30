@@ -2,8 +2,11 @@
 	
 </ion-header>
 
+<div class="background">
+
+</div>
 <ion-content>
-  <ion-grid>
+  <ion-grid class="grid">
     <ion-row justify-content-center align-items-center>
       <ion-col class="col-logo" col-10>
         <h1 class="title" text-center>
@@ -11,8 +14,8 @@
         </h1>
       </ion-col>
     </ion-row>
-    <ion-row  justify-content-center align-items-center>
-      <ion-col col-12>
+    <ion-row justify-content-center align-items-center>
+      <ion-col class="col-form" col-12>
         <form [formGroup]="formLogin" (ngSubmit)="login()">
           <ion-list no-line>  
             <ion-card>
@@ -29,7 +32,7 @@
                 <ion-input formControlName="PASSWORD" type="password"></ion-input>
               </ion-item>
             </ion-card>
-            <button color="agrosoft_blue" [disabled]="!formLogin.valid" type="submit" ion-button full>Iniciar Sesión</button>
+            <button class="button-login" [disabled]="!formLogin.valid" type="submit" ion-button full>Iniciar Sesión</button>
           </ion-list>
         </form>
       </ion-col>

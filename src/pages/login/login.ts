@@ -55,8 +55,6 @@ export class LoginPage {
           this.loader.dismiss();
           this.navCtrl.setRoot(HomePage, {}, { animate: true });  // GO TO HOME PAGE
         }, 2000);
-        //console.log(localStorage.getItem('USER'));
-        //console.log(logged);
       }else{
         this.loader.dismiss();
         this.alert("Este usuario ya esta Logeado en otro dispositivo");

@@ -27,14 +27,6 @@ export class HomePage {
 	colorBtnKG = true;
 	colorBtnLB = false;
 	outBtnLB = true;
-	/*
-	public searchResult = [{
-		empacadora: "texto empa",
-		peso: "texto peso",
-		etiqueta: "texto etiqueta",
-		fecha: "texto fecha"
-	}];
-	*/
 
 	searchResult;
 
@@ -98,8 +90,10 @@ export class HomePage {
 					this.searchResult =  this.userProvider.getWeighing();
 					if(this.searchResult){
 						this.isSearch = true;
+						this.isNotFound = false;
 					}
 					if(this.isEmptyObject(this.searchResult)){
+						console.log();
 						this.isNotFound = true;
 						this.isSearch = false;
 					}
@@ -126,70 +120,10 @@ export class HomePage {
 		content: message,
 		});
 	}
-/*
-	createPDF() {
-		let docPdfFile = {
-			content:[
-				{ text: 'AGROSOFT', style: 'header' },
-				{ text: new Date().toTimeString(), alignment: 'right'},
-				{ text: 'Hecho por '+this.userProvider.getUser()+'', style: 'subheader' },
-				{ table: {
-						headerRows: 1,
-						widths: [ 20, 'auto', 100, 50, 'auto' ],
-		
-						body: [
-							[ 
-								{ text: '#', bold: true}, 
-								{ text: 'CODE_PACKAGING', bold: true},
-								{ text: 'CODE_TAG', bold: true},
-								{ text: 'WEIGHT', bold: true},
-								{ text: 'REGISTER_DATE', bold: true}
-							]
-						]
-					}
-				}
-			],
-			styles: {
-				header: {
-					fontSize: 18,
-					bold: true
-				},
-				subheader: {
-					fontSize: 14,
-					bold: true,
-					margin: [0, 15, 0, 0]
-				},
-				row: {
-					italic: true,
-					alignment: 'center',
-					width: '50%'
-				}
-			}
-		};
-		
-		for(let i = 0; i < this.searchResult.length ; i++){
-			console.log(this.searchResult[i].CODE_PACKAGING)
-			console.log(this.searchResult[i].CODE_TAG);
-			console.log(this.searchResult[i].REGISTER_DATE);
-			console.log(this.searchResult[i].WEIGHT);
-			let rowTable = [
-				''+i,
-				this.searchResult[i].CODE_PACKAGING,
-				this.searchResult[i].CODE_TAG,
-				this.searchResult[i].WEIGHT,
-				this.searchResult[i].REGISTER_DATE
-			];
-			docPdfFile.content[3].table.body.push(rowTable);
-		}
-		
-		this.pdfObj = pdfMake.createPdf(docPdfFile);
-	}
-	*/
 
 	downloadPdf(fab: FabContainer): void{
 		this.loader = this.loadingMensaje('Construyendo Pdf...');
 		this.pdfProvider.setInstacePdf(this.userProvider.getUser());
-		//this.createPDF();
 		if(this.plt.is('cordova')){
 			//abre dependiendo del dispositivo
 			this.pdfProvider.opened();
@@ -199,10 +133,6 @@ export class HomePage {
 			fab.close();
 			this.loader.dismiss();
 		}
-	}
-
-	openMenu(): void{
-		console.log("++++++++++++++++");
 	}
 
 	closeFab(event, fab: FabContainer): void{

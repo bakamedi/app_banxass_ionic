@@ -42,8 +42,6 @@ export class SessionProvider {
   }
 
   public getSessions(){
-    console.log(this.gv.getApiSession());
-    console.log(this.userProvider.getUserToken());
     return this.http.get(""+this.gv.getApiSession()+"/"+this.userProvider.getUserToken(), this.reqOpts)
       .map( data => {
         return data;

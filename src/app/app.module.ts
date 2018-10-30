@@ -42,7 +42,6 @@ import { ConnectivityProvider } from '../providers/connectivity/connectivity';
     MomentModule,
     IonAffixModule,
     HideFabOnscrollModule,
-    //DirectivesModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

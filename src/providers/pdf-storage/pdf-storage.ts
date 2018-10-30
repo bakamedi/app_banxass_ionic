@@ -78,10 +78,6 @@ export class PdfStorageProvider {
 
   private createRowOfTable(searchResult): void{
     for(let i = 0; i < searchResult.length ; i++){
-			console.log(searchResult[i].CODE_PACKAGING)
-			console.log(searchResult[i].CODE_TAG);
-			console.log(searchResult[i].REGISTER_DATE);
-			console.log(searchResult[i].WEIGHT);
 			let rowTable = [
 				''+i,
 				searchResult[i].CODE_PACKAGING,

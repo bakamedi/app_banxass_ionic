@@ -64,7 +64,6 @@ export class SearchPage {
   }
 
   search(): void{
-    console.log("SEARCH");
     console.log(this.formSearch.value);
     this.userProvider.setflagEmptySearch(false);
     this.weighingProvider.getWeighing(this.formSearch).subscribe(weighing => {
@@ -82,7 +81,6 @@ export class SearchPage {
   }
 
   goBackPage(): void{
-    console.log("GO BACK");
     this.userProvider.setflagEmptySearch(true);
     this.navCtrl.pop();
   }

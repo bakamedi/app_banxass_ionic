@@ -27,14 +27,13 @@ export class UserProvider {
 
   // guarda datos en el dispositovo
   saveDataDevice(data): void {
-    //console.log(data);
     localStorage.setItem(this.userKey, data["user"].USER);
     localStorage.setItem(this.clientKey, data["user"].CLIENT);
     localStorage.setItem(this.userSessionName, "Buscar una Sesion");
     localStorage.setItem(this.userToken, data["token"]);
   }
 
-  // cerrar sesion
+  // al cerrar sesion se borra los datos dentro del dipositivo
   removeDataDevice(): void {
     localStorage.removeItem(this.userKey);
     localStorage.removeItem(this.clientKey);
@@ -84,17 +83,14 @@ export class UserProvider {
   }
 
   setWeighing(searchWeighing): void{
-    //localStorage.setItem(this.userSearchWei, searchWeighing);
     this.searchResult = searchWeighing;
   }
 
   getWeighing(){
-    //return localStorage.getItem(this.userSearchWei);
     return this.searchResult;
   }
 
   clearUserSearch(): void{
-    //localStorage.setItem(this.userSearchWei,"");
     this.searchResult = [];
   }
 

@@ -22,15 +22,13 @@ export class WeighingProvider {
     this.reqOpts = this. _addStandardHeaders(this.reqOpts.headers);
   }
 
-  private _addStandardHeaders(header:HttpHeaders)
-  {
+  private _addStandardHeaders(header:HttpHeaders){
     header = header.append('Content-Type','application/json');
     header = header.append('Accept','application/json');
     return header;
   }
 
-  private _initializeReqOpts(reqOpts)
-  {
+  private _initializeReqOpts(reqOpts){
     if (!reqOpts) {
       reqOpts = {
        headers: new HttpHeaders(),

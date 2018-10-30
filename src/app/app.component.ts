@@ -12,10 +12,20 @@ import { UserProvider } from '../providers/user/user';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  //rootPage:any = HomePage;
+  public pages: Array<{title: string, component: any, icon: string}>;
   rootPage:any = LoginPage;
   public loader;
   public userName: string;
+
+  private initializePages(): void {
+    this.pages = [
+      { title: 'Búsqueda', component: HomePage , icon: 'search'},
+    ];
+  }
+
+  setPage(p): void{
+    this.nav.setRoot(p.component);
+  }
 
   constructor(
     private userProvider: UserProvider,
@@ -23,23 +33,25 @@ export class MyApp {
     public loadingCtrl: LoadingController,
     private authProvider: AuthProvider,
     platform: Platform, 
-    statusBar: StatusBar, 
-    splashScreen: SplashScreen) {
+    private statusBar: StatusBar, 
+    private splashScreen: SplashScreen) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.setProfileName();
-      console.log(this.userName);
-      this.checkPreviousAuthorization();
-      statusBar.styleDefault();
-      splashScreen.hide();
+      this.initApp();
     });
   }
 
+  private initApp(){
+    this.initializePages();
+    this.setProfileName();
+    this.checkPreviousAuthorization();
+    this.statusBar.styleDefault();
+    this.splashScreen.hide();
+  }
+
   checkPreviousAuthorization(): void {
-    //console.log("AAAAAAAAAAAAAAAAAAAAA");
-    //console.log(this.authProvider.isLoggedIn());
     this.loader = this.loadingMessage("Espere..");
     setTimeout(()=>{
       if( localStorage.getItem('USER')) {
@@ -63,7 +75,6 @@ export class MyApp {
           this.nav.popToRoot();
           this.loader.dismiss();
         }, 2000);
-        //console.log(response);
       }, error => {
         console.log(error);
         this.loader.dismiss();
@@ -106,13 +117,11 @@ export class MyApp {
   }
 
   openMenu(): void{
-    console.log("++++++++++++++++");
     this.setProfileName();
   }
 
   swipeEvent(event){
     this.setProfileName();
-    console.log('----------------');
   }
 
 }

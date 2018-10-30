@@ -27,14 +27,11 @@ export class SessionListPage {
     private sessionProvider: SessionProvider,
     public navCtrl: NavController,
     public navParams: NavParams) {
-      
     this.loader = this.loadingMensaje("Cargando Sesiones..");
     this.loader.present();
     this.getSessions();
     this.loader.dismiss();
   }
-
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SessionListPage');
@@ -46,7 +43,6 @@ export class SessionListPage {
         this.existResult = true;
         this.sessionsList = sessions;
       }
-      //console.log("----->"+this.usersResult.length)
       console.log(sessions);
     }, error => {
       console.log(error);
@@ -68,6 +64,5 @@ export class SessionListPage {
   goBack(): void {
     this.navCtrl.pop();
   }
-
 
 }

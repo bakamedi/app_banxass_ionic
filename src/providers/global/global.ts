@@ -17,7 +17,6 @@ export class GlobalProvider {
   private login:          string = "login_user";
   private logOut:         string = "log_out_user";
   private usersType:      string = "users_type";
-  //private sessionCreate:  string = "create_session";
   private sessionGet:     string = "get_sessions";
   private weighingGet:       string = "get_weighing";
 
@@ -44,6 +43,5 @@ export class GlobalProvider {
   public getApiWeighingGet(): string{
     return this.url+""+this.apiWeighing+""+this.weighingGet;
   }
-
 
 }

@@ -18,10 +18,8 @@ export class AuthProvider {
     USER: ""
   }
   
-
   private reqOpts;
   private loggedIn: boolean = false;
-  //private options:RequestOptions = new RequestOptions({headers: this.headers });
   
   constructor(
     private userProvider: UserProvider,
@@ -32,15 +30,13 @@ export class AuthProvider {
     this.reqOpts = this. _addStandardHeaders(this.reqOpts.headers);
   }
 
-  private _addStandardHeaders(header:HttpHeaders)
-  {
+  private _addStandardHeaders(header:HttpHeaders){
     header = header.append('Content-Type','application/json');
     header = header.append('Accept','application/json');
     return header;
   }
 
-  private _initializeReqOpts(reqOpts)
-  {
+  private _initializeReqOpts(reqOpts){
     if (!reqOpts) {
       reqOpts = {
        headers: new HttpHeaders(),
@@ -51,10 +47,8 @@ export class AuthProvider {
   }
 
   loginUser(formLogin){
-    console.log(this.gv.getApiLogin());
     return this.http.post(""+this.gv.getApiLogin()+"", formLogin.value, this.reqOpts)
       .map(data =>{
-        //console.log(data);
         if(data['logIn']){
           this.loggedIn = false;
           return this.loggedIn;
@@ -77,10 +71,7 @@ export class AuthProvider {
       .map( data => {
         this.userProvider.removeDataDevice();
         this.loggedIn = false;
-        //console.log("------------------");
-        //console.log(this.loggedIn);
-        //console.log("------------------");
-        console.log(data);
+        //console.log(data);
       }, error => {
         console.log(error);
       });

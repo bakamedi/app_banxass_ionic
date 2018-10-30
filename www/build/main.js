@@ -93,8 +93,10 @@ var HomePage = /** @class */ (function () {
                     _this.searchResult = _this.userProvider.getWeighing();
                     if (_this.searchResult) {
                         _this.isSearch = true;
+                        _this.isNotFound = false;
                     }
                     if (_this.isEmptyObject(_this.searchResult)) {
+                        console.log();
                         _this.isNotFound = true;
                         _this.isSearch = false;
                     }
@@ -117,69 +119,9 @@ var HomePage = /** @class */ (function () {
             content: message,
         });
     };
-    /*
-        createPDF() {
-            let docPdfFile = {
-                content:[
-                    { text: 'AGROSOFT', style: 'header' },
-                    { text: new Date().toTimeString(), alignment: 'right'},
-                    { text: 'Hecho por '+this.userProvider.getUser()+'', style: 'subheader' },
-                    { table: {
-                            headerRows: 1,
-                            widths: [ 20, 'auto', 100, 50, 'auto' ],
-            
-                            body: [
-                                [
-                                    { text: '#', bold: true},
-                                    { text: 'CODE_PACKAGING', bold: true},
-                                    { text: 'CODE_TAG', bold: true},
-                                    { text: 'WEIGHT', bold: true},
-                                    { text: 'REGISTER_DATE', bold: true}
-                                ]
-                            ]
-                        }
-                    }
-                ],
-                styles: {
-                    header: {
-                        fontSize: 18,
-                        bold: true
-                    },
-                    subheader: {
-                        fontSize: 14,
-                        bold: true,
-                        margin: [0, 15, 0, 0]
-                    },
-                    row: {
-                        italic: true,
-                        alignment: 'center',
-                        width: '50%'
-                    }
-                }
-            };
-            
-            for(let i = 0; i < this.searchResult.length ; i++){
-                console.log(this.searchResult[i].CODE_PACKAGING)
-                console.log(this.searchResult[i].CODE_TAG);
-                console.log(this.searchResult[i].REGISTER_DATE);
-                console.log(this.searchResult[i].WEIGHT);
-                let rowTable = [
-                    ''+i,
-                    this.searchResult[i].CODE_PACKAGING,
-                    this.searchResult[i].CODE_TAG,
-                    this.searchResult[i].WEIGHT,
-                    this.searchResult[i].REGISTER_DATE
-                ];
-                docPdfFile.content[3].table.body.push(rowTable);
-            }
-            
-            this.pdfObj = pdfMake.createPdf(docPdfFile);
-        }
-        */
     HomePage.prototype.downloadPdf = function (fab) {
         this.loader = this.loadingMensaje('Construyendo Pdf...');
         this.pdfProvider.setInstacePdf(this.userProvider.getUser());
-        //this.createPDF();
         if (this.plt.is('cordova')) {
             //abre dependiendo del dispositivo
             this.pdfProvider.opened();
@@ -191,28 +133,30 @@ var HomePage = /** @class */ (function () {
             this.loader.dismiss();
         }
     };
-    HomePage.prototype.openMenu = function () {
-        console.log("++++++++++++++++");
-    };
     HomePage.prototype.closeFab = function (event, fab) {
         fab.close();
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Content */]),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Content */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Content */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Content */])
     ], HomePage.prototype, "content", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('fab'),
-        __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* FabContainer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* FabContainer */]) === "function" && _b || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* FabContainer */])
     ], HomePage.prototype, "fab", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-home',template:/*ion-inline-start:"/home/bakke/Documentos/Git/BanaXassApp/src/pages/home/home.html"*/'<ion-header no-border>\n  <ion-navbar color="agrosoft_blue">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title center>Agrosoft</ion-title>\n    <ion-buttons end>\n      <button (click)="openModalSearch()" ion-button icon-only>\n        <ion-icon name="search"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding #content >\n  <div (pan)="closeFab($event, fab)" class="scroll-search-result" *ngIf="isSearch" text-center>\n    <ion-list id="title-header-list" *ngIf="colorBtnKG" no-lines >\n      <ion-item-divider class="header" ion-affix [content]="content">\n        Empacadora 1\n      </ion-item-divider>\n      <ion-item *ngFor="let item of searchResult">\n        <ion-icon ios="ios-pricetag" md="md-pricetag" item-start></ion-icon>\n        <ion-grid>\n          <ion-row>\n            <ion-col>\n              <h2>Peso: {{ item.WEIGHT }} [Kg]</h2>\n              <h3>\n                Etiqueta: {{ item.CODE_TAG }}\n              </h3>\n            </ion-col>\n            <ion-col>\n              <ion-note  item-end>\n                {{ item.REGISTER_DATE | amDateFormat: \'YYYY-MM-DD\'}}\n              </ion-note>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-item>\n    </ion-list>\n    <ion-list id="title-header-list" *ngIf="colorBtnKG" no-lines >\n      <ion-item-divider ion-affix [content]="content">\n        Empacadora 2\n      </ion-item-divider>\n      <ion-item *ngFor="let item of searchResult">\n        <ion-icon ios="ios-pricetag" md="md-pricetag" item-start></ion-icon>\n        <ion-grid>\n          <ion-row>\n            <ion-col>\n              <h2>Peso: {{ item.WEIGHT}} [Kg]</h2>\n              <h3>\n                Etiqueta: {{ item.CODE_TAG }}\n              </h3>\n            </ion-col>\n            <ion-col>\n              <ion-note  item-end>\n                {{ item.REGISTER_DATE | amDateFormat: \'YYYY-MM-DD\'}}\n              </ion-note>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-item>\n    </ion-list>\n    \n    <ion-list id="title-header-list" *ngIf="colorBtnLB" no-lines >\n      <ion-item-divider ion-affix [content]="content">\n        Empacadora 1\n      </ion-item-divider>\n      <ion-item *ngFor="let item of searchResult">\n        <ion-icon ios="ios-pricetag" md="md-pricetag" item-start></ion-icon>\n        <ion-grid>\n          <ion-row>\n            <ion-col>\n              <h2>Peso: {{ item.WEIGHT*2.2  | number : \'1.2-2\'  }} [Lb]</h2>\n              <h3>\n                Etiqueta: {{ item.CODE_TAG }}\n              </h3>\n            </ion-col>\n            <ion-col>\n              <ion-note  item-end>\n                {{ item.REGISTER_DATE | amDateFormat: \'YYYY-MM-DD\'}}\n              </ion-note>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-item>\n    </ion-list>\n    <ion-list id="title-header-list" *ngIf="colorBtnLB" no-lines >\n      <ion-item-divider ion-affix [content]="content">\n        Empacadora 2\n      </ion-item-divider>\n      <ion-item *ngFor="let item of searchResult">\n        <ion-icon ios="ios-pricetag" md="md-pricetag" item-start></ion-icon>\n        <ion-grid>\n          <ion-row>\n            <ion-col>\n              <h2>Peso: {{ item.WEIGHT*2.2  | number : \'1.2-2\'  }} [Lb]</h2>\n              <h3>\n                Etiqueta: {{ item.CODE_TAG }}\n              </h3>\n            </ion-col>\n            <ion-col>\n              <ion-note  item-end>\n                {{ item.REGISTER_DATE | amDateFormat: \'YYYY-MM-DD\'}}\n              </ion-note>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-item>\n    </ion-list>\n  </div>\n  <ion-fab [hideFabOnscroll]=\'content\' *ngIf="isSearch" #fab right bottom>\n    <button ion-fab color="agrosoft_blue">\n      <ion-icon ios="ios-cog" md="md-cog"></ion-icon>\n    </button>\n    <ion-fab-list side="top">\n      <button (click)="changeWeight(1,$event, fab)" *ngIf="outBtnKG" ion-fab >Kg</button>\n      <button (click)="changeWeight(1,$event, fab)" *ngIf="colorBtnKG" color="agrosoft_blue" ion-fab>Kg</button>\n      <button (click)="changeWeight(2,$event, fab)" *ngIf="colorBtnLB" color="agrosoft_blue" ion-fab>Lb</button>\n      <button (click)="changeWeight(2,$event, fab)" *ngIf="outBtnLB" ion-fab>Lb</button>\n    </ion-fab-list>\n    <ion-fab-list side="left">\n      <button (click)="downloadPdf(fab)" ion-fab>\n        <ion-icon ios="ios-document" md="md-document"></ion-icon>\n      </button>\n    </ion-fab-list>\n  </ion-fab>\n  \n  <div *ngIf="!isSearch && !isNotFound" id="search">\n    <button (click)="openModalSearch()" clear scolor="light" ion-button> \n      <div class="center-big-icon">\n        <ion-icon  class="search-result-icon" ios="ios-search" md="md-search"></ion-icon>\n        <div class="text-icon">\n          <span class="search-text">\n            No hay datos aún<br>\n            ¡Toca para Consultar un Pesaje!\n          </span>\n        </div>\n      </div>\n    </button>\n  </div>\n\n  <div *ngIf="isNotFound" id="search">\n    <button  (click)="openModalSearch()" clear scolor="light" ion-button> \n      <div class="center-big-icon">\n        <ion-icon class="search-result-icon" ios="ios-close-circle" md="md-close-circle"></ion-icon>\n        <div class="text-icon">\n          <span class="search-text">\n            No se han encontrado datos<br>\n            ¡Vuelva a intentar con otra fecha!\n          </span>\n        </div>\n      </div>      \n    </button>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"/home/bakke/Documentos/Git/BanaXassApp/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__providers_pdf_storage_pdf_storage__["a" /* PdfStorageProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_pdf_storage_pdf_storage__["a" /* PdfStorageProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* Platform */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* LoadingController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__providers_user_user__["a" /* UserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_user_user__["a" /* UserProvider */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* MenuController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* MenuController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */]) === "function" && _j || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__providers_pdf_storage_pdf_storage__["a" /* PdfStorageProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_user_user__["a" /* UserProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* MenuController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */]])
     ], HomePage);
     return HomePage;
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -251,7 +195,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
   and Angular DI.
 */
 var AuthProvider = /** @class */ (function () {
-    //private options:RequestOptions = new RequestOptions({headers: this.headers });
     function AuthProvider(userProvider, gv, http) {
         this.userProvider = userProvider;
         this.gv = gv;
@@ -281,10 +224,8 @@ var AuthProvider = /** @class */ (function () {
     };
     AuthProvider.prototype.loginUser = function (formLogin) {
         var _this = this;
-        console.log(this.gv.getApiLogin());
         return this.http.post("" + this.gv.getApiLogin() + "", formLogin.value, this.reqOpts)
             .map(function (data) {
-            //console.log(data);
             if (data['logIn']) {
                 _this.loggedIn = false;
                 return _this.loggedIn;
@@ -306,10 +247,7 @@ var AuthProvider = /** @class */ (function () {
             .map(function (data) {
             _this.userProvider.removeDataDevice();
             _this.loggedIn = false;
-            //console.log("------------------");
-            //console.log(this.loggedIn);
-            //console.log("------------------");
-            console.log(data);
+            //console.log(data);
         }, function (error) {
             console.log(error);
         });
@@ -391,8 +329,6 @@ var LoginPage = /** @class */ (function () {
                     _this.loader.dismiss();
                     _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */], {}, { animate: true }); // GO TO HOME PAGE
                 }, 2000);
-                //console.log(localStorage.getItem('USER'));
-                //console.log(logged);
             }
             else {
                 _this.loader.dismiss();
@@ -422,7 +358,7 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-login',template:/*ion-inline-start:"/home/bakke/Documentos/Git/BanaXassApp/src/pages/login/login.html"*/'<ion-header>\n	\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row justify-content-center align-items-center>\n      <ion-col class="col-logo" col-10>\n        <h1 class="title" text-center>\n          AGROSOFT\n        </h1>\n      </ion-col>\n    </ion-row>\n    <ion-row  justify-content-center align-items-center>\n      <ion-col col-12>\n        <form [formGroup]="formLogin" (ngSubmit)="login()">\n          <ion-list no-line>  \n            <ion-card>\n              <ion-item>\n                <ion-icon item-start ios="ios-person" md="md-person"></ion-icon>\n                <ion-label>Usuario</ion-label>\n                <ion-input formControlName="USER" type="text"></ion-input>\n              </ion-item>\n            </ion-card>\n            <ion-card>\n              <ion-item>\n                <ion-icon item-start ios="ios-key" md="md-key"></ion-icon>\n                <ion-label>Contraseña</ion-label>\n                <ion-input formControlName="PASSWORD" type="password"></ion-input>\n              </ion-item>\n            </ion-card>\n            <button color="agrosoft_blue" [disabled]="!formLogin.valid" type="submit" ion-button full>Iniciar Sesión</button>\n          </ion-list>\n        </form>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>'/*ion-inline-end:"/home/bakke/Documentos/Git/BanaXassApp/src/pages/login/login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"/home/bakke/Documentos/Git/BanaXassApp/src/pages/login/login.html"*/'<ion-header>\n	\n</ion-header>\n\n<div class="background">\n\n</div>\n<ion-content>\n  <ion-grid class="grid">\n    <ion-row justify-content-center align-items-center>\n      <ion-col class="col-logo" col-10>\n        <h1 class="title" text-center>\n          AGROSOFT\n        </h1>\n      </ion-col>\n    </ion-row>\n    <ion-row justify-content-center align-items-center>\n      <ion-col class="col-form" col-12>\n        <form [formGroup]="formLogin" (ngSubmit)="login()">\n          <ion-list no-line>  \n            <ion-card>\n              <ion-item>\n                <ion-icon item-start ios="ios-person" md="md-person"></ion-icon>\n                <ion-label>Usuario</ion-label>\n                <ion-input formControlName="USER" type="text"></ion-input>\n              </ion-item>\n            </ion-card>\n            <ion-card>\n              <ion-item>\n                <ion-icon item-start ios="ios-key" md="md-key"></ion-icon>\n                <ion-label>Contraseña</ion-label>\n                <ion-input formControlName="PASSWORD" type="password"></ion-input>\n              </ion-item>\n            </ion-card>\n            <button class="button-login" [disabled]="!formLogin.valid" type="submit" ion-button full>Iniciar Sesión</button>\n          </ion-list>\n        </form>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>'/*ion-inline-end:"/home/bakke/Documentos/Git/BanaXassApp/src/pages/login/login.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* MenuController */],
@@ -507,7 +443,6 @@ var SearchPage = /** @class */ (function () {
     };
     SearchPage.prototype.search = function () {
         var _this = this;
-        console.log("SEARCH");
         console.log(this.formSearch.value);
         this.userProvider.setflagEmptySearch(false);
         this.weighingProvider.getWeighing(this.formSearch).subscribe(function (weighing) {
@@ -522,7 +457,6 @@ var SearchPage = /** @class */ (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__session_list_session_list__["a" /* SessionListPage */]);
     };
     SearchPage.prototype.goBackPage = function () {
-        console.log("GO BACK");
         this.userProvider.setflagEmptySearch(true);
         this.navCtrl.pop();
     };
@@ -595,7 +529,6 @@ var SessionListPage = /** @class */ (function () {
                 _this.existResult = true;
                 _this.sessionsList = sessions;
             }
-            //console.log("----->"+this.usersResult.length)
             console.log(sessions);
         }, function (error) {
             console.log(error);
@@ -733,8 +666,6 @@ var SessionProvider = /** @class */ (function () {
         return reqOpts;
     };
     SessionProvider.prototype.getSessions = function () {
-        console.log(this.gv.getApiSession());
-        console.log(this.userProvider.getUserToken());
         return this.http.get("" + this.gv.getApiSession() + "/" + this.userProvider.getUserToken(), this.reqOpts)
             .map(function (data) {
             return data;
@@ -910,10 +841,6 @@ var PdfStorageProvider = /** @class */ (function () {
     };
     PdfStorageProvider.prototype.createRowOfTable = function (searchResult) {
         for (var i = 0; i < searchResult.length; i++) {
-            console.log(searchResult[i].CODE_PACKAGING);
-            console.log(searchResult[i].CODE_TAG);
-            console.log(searchResult[i].REGISTER_DATE);
-            console.log(searchResult[i].WEIGHT);
             var rowTable = [
                 '' + i,
                 searchResult[i].CODE_PACKAGING,
@@ -1050,7 +977,6 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_17_angular2_moment__["MomentModule"],
                 __WEBPACK_IMPORTED_MODULE_20_ion_affix__["a" /* IonAffixModule */],
                 __WEBPACK_IMPORTED_MODULE_21_ionic_hide_fab_onscroll__["a" /* HideFabOnscrollModule */],
-                //DirectivesModule,
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
@@ -1128,13 +1054,12 @@ var UserProvider = /** @class */ (function () {
     }
     // guarda datos en el dispositovo
     UserProvider.prototype.saveDataDevice = function (data) {
-        //console.log(data);
         localStorage.setItem(this.userKey, data["user"].USER);
         localStorage.setItem(this.clientKey, data["user"].CLIENT);
         localStorage.setItem(this.userSessionName, "Buscar una Sesion");
         localStorage.setItem(this.userToken, data["token"]);
     };
-    // cerrar sesion
+    // al cerrar sesion se borra los datos dentro del dipositivo
     UserProvider.prototype.removeDataDevice = function () {
         localStorage.removeItem(this.userKey);
         localStorage.removeItem(this.clientKey);
@@ -1177,15 +1102,12 @@ var UserProvider = /** @class */ (function () {
         localStorage.setItem(this.userSessionType, userTempSession.TYPE);
     };
     UserProvider.prototype.setWeighing = function (searchWeighing) {
-        //localStorage.setItem(this.userSearchWei, searchWeighing);
         this.searchResult = searchWeighing;
     };
     UserProvider.prototype.getWeighing = function () {
-        //return localStorage.getItem(this.userSearchWei);
         return this.searchResult;
     };
     UserProvider.prototype.clearUserSearch = function () {
-        //localStorage.setItem(this.userSearchWei,"");
         this.searchResult = [];
     };
     UserProvider.prototype.setflagEmptySearch = function (flag) {
@@ -1242,33 +1164,44 @@ var MyApp = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.loadingCtrl = loadingCtrl;
         this.authProvider = authProvider;
-        //rootPage:any = HomePage;
+        this.statusBar = statusBar;
+        this.splashScreen = splashScreen;
         this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */];
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-            _this.setProfileName();
-            console.log(_this.userName);
-            _this.checkPreviousAuthorization();
-            statusBar.styleDefault();
-            splashScreen.hide();
+            _this.initApp();
         });
     }
+    MyApp.prototype.initializePages = function () {
+        this.pages = [
+            { title: 'Búsqueda', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */], icon: 'search' },
+        ];
+    };
+    MyApp.prototype.setPage = function (p) {
+        this.nav.setRoot(p.component);
+    };
+    MyApp.prototype.initApp = function () {
+        this.initializePages();
+        this.setProfileName();
+        this.checkPreviousAuthorization();
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+    };
     MyApp.prototype.checkPreviousAuthorization = function () {
         var _this = this;
-        //console.log("AAAAAAAAAAAAAAAAAAAAA");
-        //console.log(this.authProvider.isLoggedIn());
         this.loader = this.loadingMessage("Espere..");
         setTimeout(function () {
             if (localStorage.getItem('USER')) {
                 _this.setProfileName();
                 _this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
+                _this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */], {}, { animate: true });
             }
             else {
                 _this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */];
             }
             _this.loader.dismiss();
-        }, 500);
+        }, 0);
     };
     MyApp.prototype.logOut = function () {
         var _this = this;
@@ -1281,7 +1214,6 @@ var MyApp = /** @class */ (function () {
                     _this.nav.popToRoot();
                     _this.loader.dismiss();
                 }, 2000);
-                //console.log(response);
             }, function (error) {
                 console.log(error);
                 _this.loader.dismiss();
@@ -1319,14 +1251,17 @@ var MyApp = /** @class */ (function () {
         this.userName = this.userProvider.getUser();
     };
     MyApp.prototype.openMenu = function () {
-        console.log("++++++++++++++++");
+        this.setProfileName();
+    };
+    MyApp.prototype.swipeEvent = function (event) {
+        this.setProfileName();
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Nav */]),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/home/bakke/Documentos/Git/BanaXassApp/src/app/app.html"*/'\n<ion-menu [content]="content">\n	<ion-content>\n		<ion-list>\n			<ion-item color="agrosoft_blue">\n				<ion-avatar item-start>\n					<img src="../assets/imgs/profile.png">\n				</ion-avatar>\n				<h2>{{ userName }}</h2>\n			</ion-item>\n		</ion-list>\n		<ion-list no-lines>\n			<button menuClose (click)="alertMessage()" ion-item>\n				<ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>\n				Cerrar Sesión\n			</button>\n		</ion-list>\n	</ion-content>\n</ion-menu>\n\n<ion-nav (swipe)="swipeEvent($event)" (click)="openMenu()" [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>        \n'/*ion-inline-end:"/home/bakke/Documentos/Git/BanaXassApp/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/home/bakke/Documentos/Git/BanaXassApp/src/app/app.html"*/'\n<ion-menu [content]="content">\n	<ion-content class="color-menu">\n		<ion-list>\n			<ion-item color="agrosoft_blue">\n				<ion-avatar item-start>\n					<img src="../assets/imgs/profile.png">\n				</ion-avatar>\n				<h2>{{ userName }}</h2>\n			</ion-item>\n		</ion-list>\n		<ion-list no-lines>\n			<button color="agrosoft_blue" menuClose ion-item *ngFor="let p of pages" (click)="setPage(p)">\n					{{p.title}}\n				<ion-icon item-end ios="ios-{{p.icon}}" md="md-{{p.icon}}"></ion-icon>\n			</button>\n			<button color="agrosoft_blue" menuClose (click)="alertMessage()" ion-item>\n					Cerrar Sesión\n				<ion-icon item-end  ios="ios-log-out" md="md-log-out"></ion-icon>\n			</button>\n		</ion-list>\n	</ion-content>\n</ion-menu>\n\n<ion-nav (swipe)="swipeEvent($event)" (click)="openMenu()" [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>        \n'/*ion-inline-end:"/home/bakke/Documentos/Git/BanaXassApp/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_7__providers_user_user__["a" /* UserProvider */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
@@ -1658,7 +1593,7 @@ var ConnectivityProvider = /** @class */ (function () {
             if (_this.previousStatus === ConnectionStatusEnum.Online) {
                 _this.eventCtrl.publish('network:offline');
                 _this.alertCtrl.create();
-                console.log("off");
+                //console.log("off");
             }
             _this.previousStatus = ConnectionStatusEnum.Offline;
         });
@@ -1666,7 +1601,7 @@ var ConnectivityProvider = /** @class */ (function () {
             if (_this.previousStatus === ConnectionStatusEnum.Offline) {
                 _this.eventCtrl.publish('network:online');
                 _this.alertCtrl.create();
-                console.log("on");
+                //console.log("on");
             }
             _this.previousStatus = ConnectionStatusEnum.Online;
         });
@@ -1716,7 +1651,6 @@ var GlobalProvider = /** @class */ (function () {
         this.login = "login_user";
         this.logOut = "log_out_user";
         this.usersType = "users_type";
-        //private sessionCreate:  string = "create_session";
         this.sessionGet = "get_sessions";
         this.weighingGet = "get_weighing";
         console.log('Hello GlobalProvider Provider');

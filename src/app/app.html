@@ -1,6 +1,6 @@
 
 <ion-menu [content]="content">
-	<ion-content>
+	<ion-content class="color-menu">
 		<ion-list>
 			<ion-item color="agrosoft_blue">
 				<ion-avatar item-start>
@@ -10,9 +10,13 @@
 			</ion-item>
 		</ion-list>
 		<ion-list no-lines>
-			<button menuClose (click)="alertMessage()" ion-item>
-				<ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
-				Cerrar Sesión
+			<button color="agrosoft_blue" menuClose ion-item *ngFor="let p of pages" (click)="setPage(p)">
+					{{p.title}}
+				<ion-icon item-end ios="ios-{{p.icon}}" md="md-{{p.icon}}"></ion-icon>
+			</button>
+			<button color="agrosoft_blue" menuClose (click)="alertMessage()" ion-item>
+					Cerrar Sesión
+				<ion-icon item-end  ios="ios-log-out" md="md-log-out"></ion-icon>
 			</button>
 		</ion-list>
 	</ion-content>
